@@ -12,7 +12,7 @@ A tale about making Molecule work for you.
 - Bash for lazy developers
 
 
-![ssssnake](images/snake.png)
+<img src="images/snake.png" width="40%" style="background:none; border:none; box-shadow:none;">
 
 Note:
 - python-based
@@ -23,6 +23,16 @@ Note:
 
 
 ### A programming language
+
+
+### Install a Package
+
+```ansible
+- name: Update dnsmasq
+  package:
+    name: dnsmasq
+    state: present
+```
 
 
 
@@ -39,8 +49,7 @@ Note:
 - According to wikipedia
 
 
-![](images/molecule.png)
-
+<img src="images/molecule.png" width="40%" style="background:none; border:none; box-shadow:none;">
 
 
 ## Molecule
@@ -78,15 +87,58 @@ Note:
 - Testinfra is a lot like serverspec
 - Goss is written in Go, looks tasty
 
+
+## Testinfra
+
+```python
+def test_dnsmasq_package(host):
+    dnsmasq_package = host.package('dnsmasq')
+
+    assert dnsmasq_package.is_installed
+    assert dnsmasq_package.version.startswith("2.76")
+```
+
+
 ## Virtualenv
 
 It works! Use it!
 
 
 
+
 ### I thought this was easy
 
-`molecule converge`
+`molecule test`
+
+
+### I wrote
+```ansible
+- name: Update dnsmasq
+  package:
+    name: dnsmasq
+    state: present
+```
+
+
+### I tested
+```python
+def test_dnsmasq_package(host):
+    dnsmasq_package = host.package('dnsmasq')
+
+    assert dnsmasq_package.is_installed
+    assert dnsmasq_package.version.startswith("2.76")
+```
+
+
+### I ran
+
+```bash
+source $(pipenv --venv)/bin/activate && molecule test
+```
+
+
+### I got
+![](images/bing.png)
 
 
 
@@ -102,6 +154,6 @@ It works! Use it!
 
 
 # Contact info
-Jacob Castello
-jacob.castello@excella.com
-github.com/champain
+* Jacob Castello
+* jacob.castello@excella.com
+* github.com/champain
